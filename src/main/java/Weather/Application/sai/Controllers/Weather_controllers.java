@@ -1,10 +1,9 @@
 package Weather.Application.sai.Controllers;
 
 import Weather.Application.sai.DTO.AirPollutionDTO;
-import Weather.Application.sai.DTO.CoordinatesDTO;
+import Weather.Application.sai.DTO.ForecastDTO;
 import Weather.Application.sai.DTO.WeatherDTO;
 import Weather.Application.sai.Services.Service;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,13 +15,19 @@ public class Weather_controllers {
     }
 
     @GetMapping("/city/{cityName}")
-    public @ResponseBody WeatherDTO currentWeatherAndForecasts(@PathVariable String cityName){
+    public @ResponseBody WeatherDTO currentWeather(@PathVariable String cityName){
 
-        return service.getWeatherAndForecasts(cityName);
+        return service.getWeather(cityName);
+    }
+    @GetMapping("/forecast/city/{cityName}")
+    public @ResponseBody ForecastDTO getWeatherForecasts(@PathVariable String cityName){
+
+         return service.getWeatherForecast(cityName);
     }
     @GetMapping("/air_pollution/{cityName}")
     public @ResponseBody AirPollutionDTO getAirPollution(@PathVariable String cityName) {
          return service.getAirPollution(cityName);
     }
+
 
 }
