@@ -1,5 +1,7 @@
 package Weather.Application.sai.Controllers;
 
+import Weather.Application.sai.DTO.AirPollutionDTO;
+import Weather.Application.sai.DTO.CoordinatesDTO;
 import Weather.Application.sai.DTO.WeatherDTO;
 import Weather.Application.sai.Services.Service;
 import org.springframework.stereotype.Controller;
@@ -12,16 +14,15 @@ public class Weather_controllers {
     public Weather_controllers(Service service){
         this.service = service;
     }
-    @GetMapping("")
-    public @ResponseBody String met(){
-        return  "hello world";
-    }
+
     @GetMapping("/city/{cityName}")
     public @ResponseBody WeatherDTO currentWeatherAndForecasts(@PathVariable String cityName){
+
         return service.getWeatherAndForecasts(cityName);
     }
-    @GetMapping("/year/{city}/{year}")
-    public void GetStatisticalYearData(@PathVariable String city,@PathVariable int year){
-        service.getYearData(city,year);
+    @GetMapping("/air_pollution/{cityName}")
+    public @ResponseBody AirPollutionDTO getAirPollution(@PathVariable String cityName) {
+         return service.getAirPollution(cityName);
     }
+
 }
